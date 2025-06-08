@@ -1,0 +1,309 @@
+# Site
+repository: Git repository where your resume will be hosted, only required if you are hosting on GitHub (eg. sproogen/modern-resume-theme)
+# favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
+
+# Content configuration version
+version: 2
+
+url: davidrengineer.github.io
+baseurl: /linux_cli
+
+# Personal info
+name: LINUX - CLI
+#title: by David Ramirez
+#email: Your email (optional)
+# email_title: Email (Email title override)
+#phone: Your phone number (optional)
+# phone_title: Phone (Phone title override)
+
+
+# Dark Mode (true/false/never)
+darkmode: never
+
+
+# About Section
+about_title: LINUX -CLI
+# about_profile_image: images/Profile.jpeg
+about_content: | # this will include new lines to allow paragraphs
+  **Command Line Basics**
+  ```
+  $ -> nomral user
+  whoami (view current user)
+  pwd    (view current directory)
+  cd .   (current directory)
+  cd ..  (parent directory)
+  cd ~   (home directory)
+  cd -   (previous directory)
+  ls     (view files in current directory)
+  ls -a  (view all files including hidden files)
+  ls -l  (view files in long format)
+  touch file.txt  (create a file)
+  file file.txt  (view file type)
+  cat file.txt  (view file content)
+  history  (view command history)
+  clear  (clear terminal)
+  copy -r file dir1 (copy file or directory)
+  copy -i file dir1 (copy file or directory with confirmation)
+  mv oldfile.txt newfile.txt  (rename or move file)
+  mv file.txt dir1/  (move file to directory)
+  mkdir dir1  (create a directory)
+  rm -r dir1  (remove directory)
+  man command (documentation about the command)
+  whatis command (short description of the command)
+  alias ll='ls -l'  (create an alias for a command)
+  unalias ll  (remove an alias)
+  Keep in mind that this command won't save your alias after reboot, so you'll need to add a permanent alias in: ~/.bashrc
+  sudo reboot (reboot the system)
+  sudo shutdown -r now (reboot the system immediately)
+  sudo shutdown -h now (shutdown the system immediately)
+  exit (leave terminal)
+  ```
+
+  **Text**
+  ```
+  echo Hello World > file.txt  (write to a file)
+  echo Hello World >> file.txt (append to a file)
+  echo $HOME (view home directory)
+  echo $PATH (view path variable)
+  echo $SUSER (view current user)
+  env (view environment variables)
+  grep word file.txt (search for a word in a file)
+  grep -i word file.txt (search for a word in a file ignoring case)
+  env | grep -i User (search for a word in environment variables, it is an example of how to use grep)
+
+  tar -czvf archive.tar.gz file.txt (create a compressed archive)
+  tar -xzvf archive.tar.gz (extract a compressed archive)
+  ```
+
+  **User Managment**
+  ```
+  cat /etc/passwd (view users)
+  sudo cat /etc/shadow (store information about users authentication)
+  sudo useradd newuser (create a new user)
+  sudo userdel newuser (delete a user)
+  passwd newuser (change user password)
+  ```
+
+
+  **Permissions**
+  ```
+  chmod -R 777 file.txt (change file permissions to read, write and execute for everyone)
+  ls -lah file.txt (view file permissions in long format)
+  sudo chmod +x file.txt (add execute permission to a file) 
+  ```
+
+
+  **Processes**
+  ```
+  ps aux (view running processes)
+  top (view running processes in real time)
+  ps aux | grep process_name (find a process by name)
+  pgrep process_name (find process ID by name)
+  kill process_id (kill a process by ID)
+  kill -9 process_id (force kill a process by ID)
+  ls /proc (view processes in /proc directory)
+  cat /proc/process_id/status (view process status)
+  ps aux | grep python (find all python processes)
+  ```
+
+
+  **Kernel**
+  ```
+  uname -r (view kernel version)
+  lsmod (view loaded kernel modules)
+  ```
+
+  **Systemd**
+  ```
+  systemctl list-units (list all systemd units)
+  sudo systemctl status (view system status)
+  sudo systemctl start service (start a service)
+  sudo systemctl stop service (stop a service)
+  sudo systemctl restart service (restart a service)
+  sudo systemctl enable service (enable a service to start on boot)
+  sudo systemctl disable service (disable a service to start on boot) 
+  ```
+
+  **Rsync**
+  ```
+  rsync -zvr source/ destination/ (copy files and directories)
+  rsync local_file.txt user@remote_host:/path/to/destination/ (copy file to remote host)
+  rsync  user@remote_host:/path/to/source/ local_destination/ (copy file from remote host)
+  rsync -avz --progress source/ destination/ (copy files and directories with progress)
+  rsync -avz -e "ssh -p 4422" source/ user@remote_host:/path/to/destination/ (copy files and directories over SSH with custom port)
+
+  ```
+
+  **Network**
+  ```
+  ifconfig -a (view network interfaces)
+  sudo route -n (view routing table)
+  ifconfig eth0 192.168.2.1(example) netmask 255.255.255.0 up (set IP address for interface eth0)
+  ifup eth0 (bring up interface eth0)
+  ifdown eth0 (bring down interface eth0)
+  ip link show (view network interfaces)
+  ip addr show (view IP addresses)
+  ip link set eth0 up (bring up interface eth0)
+  ip link set eth0 down (bring down interface eth0)
+  ip address add 192.168.1.1/24 dev eth0 (set IP address for interface eth0)
+  ip route add 192.168.2.1/24 via 10.11.12.3 # (add a route)
+  ip route add default via 192.168.1.1 (set default gateway)
+  ip route show (view routing table)
+  ip neigh show (view neighbors)
+  ping -c 3 google.com (ping a host)
+  netstat -at (list all TCP connections)
+  netstat -au (list all UDP connections) 
+  netstat -l (list all listening ports)
+  cat /etc/hosts (view hosts file)
+  cat /etc/resolv.conf (view DNS configuration)
+  sudo pacman -S net-tool (install net-tools Arch Linux) 
+  sudo netstat -tuln | grep ':80' (view listening ports on port 80)
+  sudo netstat -tuln | grep ':443' (view listening ports on port 443)
+  sudo lsof -i :80 (processes using port 80)
+  sudo ss -tulpn | grep port_number (view processes using a specific port TCP/UDP)
+  sudo ss -ulpn | grep port_number (view processes using a specific port UDP)
+
+
+  # Systemd Network Configuration (recommended for Servers) Satic IP Address
+
+  nano /etc/systemd/network/10-static.network
+  Content:
+    [Match]
+    Name=eno1  # Interface name, change it to your interface name
+    Address=192.168.1.100/24  # Static IP address
+    Gateway=192.168.1.1 # Default gateway
+    DNS=8.8.8.8 # DNS server
+
+  systemctl restart systemd-networkd
+  ```
+
+  **Arch Linux - Nginx**
+  ```
+  sudo pacman -S nginx (install nginx)
+  sudo systemctl start nginx (start nginx service)
+  sudo systemctl enable nginx (enable nginx service to start on boot)
+  sudo systemctl status nginx (view nginx service status)
+  sudo pacman -S cerbot (install cerbot)
+  sudo pacman - S cerbot-nginx (install cerbot nginx plugin)
+  sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com (obtain SSL certificate for your domain)
+  sudo systemctl status certbot.timer (view certbot timer status)
+  sudo certbot renew --dry-run (test certificate renewal)
+  sudo systemctl enable --now certbot-renew.timer (enable certbot renewal timer to start on boot)
+  sudo systemctl status certbot-renew.timer (view certbot renewal timer status)
+  sudo nginx -t (test nginx configuration)
+  ps aux | grep nginx (view nginx processes)
+  sudo systemctl restart nginx (restart nginx service)
+
+  curl -I http://yourdomain.com (check if nginx is serving your domain)
+  curl -I https://yourdomain.com (check if nginx is serving your domain with SSL)
+  nslookup yourdomain.com (check if your domain is resolving to the correct IP address)
+  ```
+
+  **Arch Linux- Service to start on boot**
+  ``` 
+  chmod +x /path/to/script.sh (make script executable)
+  sudo nano /etc/systemd/system/script.service (create systemd service file)
+
+  Content:
+    [Unit]
+    Description=Script Service
+    After=network.target 
+
+    [Service]
+    Type=oneshot 
+    ExecStart=/path/to/script.sh or ExecStart=/usr/bin/python3 /path/to/script.py (for python scripts) 
+
+
+  # To Run service after X period of time
+  sudo nano /etc/systemd/system/script.timer (create systemd timer file)
+
+  Content:  
+    [Unit]
+    Description=Script Service
+
+    [Timer]
+    OnBootSec=10min (time to wait after boot)
+    OnUnitActiveSec=1h (time to wait after last execution)
+
+    [Install]
+    WantedBy=timers.target  
+
+  sudo systemctl daemon-reload (reload systemd configuration)
+  sudo systemctl enable --now sevice_name.timer (enable timer to start on boot)
+
+  systemctl list-timers | grep service_name (view timer status)
+  journalctl -u service_name.service -n 20 (view last 20 lines of service log)
+  ```
+
+  **Pacman**
+  ```
+  sudo pacman -Rsn package_name (remove package and its dependencies)
+  pacman -Qdt (list orphaned packages)
+  sudo pacman -Rns $(pacman -Qdtq) (remove orphaned packages)
+  pacman -Qqet (list explicitly installed packages)
+  yay -Yc (list (remmve orphaned packages AUR)
+  yay -Scc (remove cached packages AUR)
+  rm -rf ~/.cache/yay/*  (remove manually cached packages AUR)
+  sudo pacman -S pacman-contrib (install pacman contrib package)
+    sudo paccache -r (remove old package versions)
+  sudo pacman -Sc (remove cached packages)
+  sudo pacman -Scc (remove all cached packages)  
+  sudo journalctl --vacuum-time=7d (remove journal logs older than 7 days)
+
+  yay -Sua (update AUR packages)
+  yay -Syyu (update all packages including AUR)
+  sudo pacman -Syu (update all packages)
+  ```
+
+  **Disk**
+  ```
+  sudo pacman -S ncdu (install ncdu))
+    sudo ncdu (view disk usage) 
+  sudo lsblk -f (view partitions and their file systems)
+  sudo fdisk -l (view partitions and their file systems) 
+  sudo blkid /dev/sdaX (view partition UUID)
+  sudo mount /dev/sdaX /mnt (mount partition)
+  sudo umount /mnt (unmount partition)
+  sudo mkdir -p /mnt/partition_name (create mount point)
+  sudo mkfs.ext4 /dev/sdaX (format partition to ext4, change /dev/sdaX to your partition)
+  sudo fdisk -l /dev/sda (view disk partitions)
+  sudo nano /etc/fstab (edit fstab file to mount partitions on boot)
+  Content:
+    /dev/sdaX /mnt ext4 defaults 0 2 (mount partition on boot, change /dev/sdaX to your partition)
+    UUID=your_partition_uuid /mnt ext4 defaults 0 2 (mount partition on boot using UUID)
+  ```   
+
+  **SSH Tunnel**
+  ```
+  ssh -L [local_port]:[destination_host]:[destination_port] [ssh_target]  
+
+  ```
+
+  
+# Footer
+footer_show_references: false
+# references_title: References on request (Override references text)
+
+# Build settings
+# theme: modern-resume-theme (Use this is you are hosting your resume yourself)
+# remote_theme: sproogen/modern-resume-theme (Use this if you are hosting your resume on GitHub)
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+ - jekyll-seo-tag
+
+exclude : [
+  "Gemfile",
+  "Gemfile.lock",
+  "node_modules",
+  "vendor/bundle/",
+  "vendor/cache/",
+  "vendor/gems/",
+  "vendor/ruby/",
+  "lib/",
+  "scripts/",
+  "docker-compose.yml",
+  ]
